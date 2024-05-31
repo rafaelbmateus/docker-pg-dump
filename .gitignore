@@ -1,0 +1,4 @@
+postgres/*
+dumps/*
+!/dumps/.gitkeep
+.env
