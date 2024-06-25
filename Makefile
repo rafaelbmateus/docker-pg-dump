@@ -25,6 +25,12 @@ dump: run
 		docker-pg-dump \
 		dump.sh
 
+run-daily: run
+	sleep 1
+	docker exec -ti \
+		docker-pg-dump \
+		run-daily
+
 bash: run
 	docker exec -ti \
 		docker-pg-dump \

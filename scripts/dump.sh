@@ -5,11 +5,12 @@ source slack.sh
 DUMP_DIR="/dumps"
 DUMP_NAME="$(date +'%Y%m%d%H%M%S').sql"
 
-pg_dump -U $POSTGRES_USER -d $POSTGRES_DB > $DUMP_DIR/$DUMP_NAME
+export PGPASSWORD=$POSTGRES_PASSWORD
+pg_dump -h $POSTGRES_HOST -U $POSTGRES_USER -d $POSTGRES_DB > $DUMP_DIR/$DUMP_NAME
 
 if [ $? -eq 0 ]; then
   echo "Dump completed successfully"
-  cp -f $DUMP_DIR/$DUMP_NAME $DUMP_DIR/lastdump.sql
+  cp -f $DUMP_DIR/$DUMP_NAME $DUMP_DIR/last.sql
   send_slack_notification "Dump completed successfully"
   exit 0
 else
